@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canteen Pre-Order</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #ea580c;
+      --accent-soft: #fff7ed;
+      --border: #e2e8f0;
+      --shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+    }
+
+    .header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.875rem;
+    }
+
+    @media (min-width: 540px) {
+      .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+    }
+
+    @media (min-width: 720px) {
+      .menu-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .menu-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+    }
+
+    .emoji-box {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 12px;
+      background-color: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .item-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .item-price {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>Canteen Pre-Order</h1>
+      <span class="subtitle">Today's Menu</span>
+    </div>
+  </header>
+
+  <main>
+    <div id="menu-grid" class="menu-grid"></div>
+  </main>
+
+  <script>
+    const menuItems = [
+      { id: 1, name: "Samosa", price: 15, emoji: "🥟" },
+      { id: 2, name: "Masala Dosa", price: 50, emoji: "🥞" },
+      { id: 3, name: "Veg Sandwich", price: 40, emoji: "🥪" },
+      { id: 4, name: "Masala Tea", price: 10, emoji: "🍵" },
+      { id: 5, name: "Filter Coffee", price: 15, emoji: "☕" },
+      { id: 6, name: "Fresh Juice", price: 30, emoji: "🧃" },
+      { id: 7, name: "Veg Fried Rice", price: 70, emoji: "🍚" },
+      { id: 8, name: "Veg Burger", price: 60, emoji: "🍔" }
+    ];
+
+    function renderMenu() {
+      const grid = document.getElementById("menu-grid");
+      grid.innerHTML = menuItems
+        .map(
+          (item) => `
+          <article class="menu-card">
+            <div class="emoji-box" aria-hidden="true">${item.emoji}</div>
+            <h2 class="item-name">${item.name}</h2>
+            <p class="item-price">₹${item.price}</p>
+          </article>
+        `
+        )
+        .join("");
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
